@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SQL Create Statement Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+</head>
+
+<body>
+    <div id="app" class="flex vertical">
+        <div class="header">
+            <h1 class="inline-flex grow">SQL: Create Statement Generator</h1>
+            <div class="right">
+                <a class="action" @click="copyQuery">
+                    <i class="material-icons md-light">file_copy</i>
+                    <span>Copy All</span>
+                </a>
+                <a class="action" @click="reset">
+                    <i class="material-icons md-light">refresh</i>
+                    <span>Reset</span>
+                </a>
+            </div>
+        </div>
+        <div class="content grow flex vertical">
+            <div class="row flex grow">
+                <div class="panel shadow half flex grow vertical">
+                    <div class="panel-label noselect">List View</div>
+                    <div class="main-configurations shadow">
+                        <input type="text" v-model="databaseName">
+                        <input type="text" v-model="tableName">
+                    </div>
+                    <div class="configurations">
+                        <div v-for="object in queryObjects" class="configuration-row">
+                            <label for="">COLUMN_NAME<input type="text" v-model="object['COLUMN_NAME']"></label>
+                            <label for="">DATA_TYPE<input type="text" v-model="object['DATA_TYPE']"></label>
+                            <label for="">PK<input type="text" class="small" v-model="object['PK']"></label><br>
+                            <label for="">NULLABLE<input type="text" class="small" v-model="object['NULLABLE']"></label>
+                            <label for="">DEFAULT<input type="text" class="small" v-model="object['DEFAULT']"></label>
+                            <label for="">AUTOINCREMENT<input type="text" class="small" v-model="object['AUTOINCREMENT']"></label>
+                            <label for="">COMPUTED<input type="text" class="small" v-model="object['COMPUTED']"></label>
+                            <label for="">REMARKS<input type="text" class="small" v-model="object['REMARKS']"></label>
+                            <label for="">JDBC_Type<input type="text" class="small" v-model="object['JDBC_Type']"></label>
+                            <label for="">SCALE/SIZE<input type="text" class="small" v-model="object['SCALE/SIZE']"></label>
+                            <label for="">PRECISION<input type="text" class="small" v-model="object['PRECISION']"></label>
+                            <label for="">POSITION<input type="text" class="small" v-model="object['POSITION']"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel shadow half flex grow">
+                    <div class="panel-label noselect">Quick Edit Mode</div>
+                    <textarea id="" class="full-width" v-model="inputCSV"></textarea>
+                </div>
+            </div>
+            <div class="row flex grow">
+                <div class="panel shadow flex grow output">
+                    <div class="panel-label noselect">Output</div>
+                    <div id="editor">
+                        {{query}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="https://github.com/imadx" target="_blank" class="action">
+                <i class="material-icons md-light">code</i>
+                <span>github.com/imadx</span>
+            </a>
+        </div>
+        <div class="message" v-bind:class="{'active': messageShown}" @click="dismissMessage">
+            <span>{{message}}</span>
+        </div>
+    </div>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
