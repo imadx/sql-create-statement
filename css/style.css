@@ -160,6 +160,7 @@ a:visited {
 
 input,
 textarea {
+  color: #fff;
   background: #1d1e22;
   border: none;
   padding: 0.6em 1em;
